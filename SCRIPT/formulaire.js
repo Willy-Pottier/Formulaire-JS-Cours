@@ -55,8 +55,19 @@ export default class Formulaire {
         this.formData = new FormData(this.formulaireHTML)
         this.formData.forEach (
             (value, key) => {
-                console.log(key + " : " + value)
+                if(value != "" && value != "on")
+                    this.answers.push([key, value])
             }
         )
+        return this.answers
+    }
+
+    //méthode pour afficher dans un alert les résultats
+    affAnswers() {
+        let chaine = "Récapitulatif\n\n"
+        for (let ligne of this.getAnswers()) {
+            chaine += `${ligne[0]} : ${ligne[1]}\n`
+        }
+        alert(chaine)
     }
 }
